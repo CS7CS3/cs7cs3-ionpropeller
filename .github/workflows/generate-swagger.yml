@@ -19,12 +19,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
-    - name: Read Swagger Specification
-      run: |
-        dotnet run --project IonPropeller
-        curl -fsSL http://localhost:7244/swagger/v1/swagger.json -o swagger.json
-    - name: Download a Build Artifact
+      run: dotnet build --no-restore -c Debug
+    - name: Generate Swagger
+      run: dotnet swagger tofile --output swagger.json IonPropeller/bin/Debug/net6.0/IonPropeller.dll v1
+    - name: Download Artifact
       uses: actions/download-artifact@v3.0.0
       with:
         name: swagger.json
