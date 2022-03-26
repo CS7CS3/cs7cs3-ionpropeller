@@ -14,7 +14,8 @@
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:7244;http://localhost:5237",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "mapbox_access_token": "pk.eyJ1IjoiYW1waGluZWtvIiwiYSI6ImNrejV0dTRvZTBvdXUyb3FmdHdmbXgyaGkifQ.qSX45S404Pbr9PX9WbjuKA"
       }
     },
     "IIS Express": {

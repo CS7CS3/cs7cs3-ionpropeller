@@ -6,33 +6,34 @@ namespace IonPropeller.RemoteServices.Mapbox;
 
 public class MapboxClient
 {
-    private readonly Uri baseUri = new("https://api.mapbox.com/");
-    private readonly HttpClient client;
+    private readonly Uri _baseUri = new("https://api.mapbox.com/");
 
-    private readonly IReadOnlyDictionary<string, string> defaultQueryParams;
+    private readonly HttpClient _client;
+
+    private readonly IReadOnlyDictionary<string, string> _defaultQueryParams;
 
     public MapboxClient(MapboxConfiguration configuration)
     {
-        defaultQueryParams = new Dictionary<string, string> {{"access_token", configuration.AccessToken}};
-        client = new HttpClient();
+        _defaultQueryParams = new Dictionary<string, string> {{"access_token", configuration.AccessToken}};
+        _client = new HttpClient();
     }
 
     public async Task<MapboxGeocodingResponse> Forward(string search, MapboxGeocodingRequest request)
     {
-        var uri = new Uri(baseUri, $"geocoding/v5/mapbox.places/{HttpUtility.UrlEncode(search)}.json");
+        var uri = new Uri(_baseUri, $"geocoding/v5/mapbox.places/{HttpUtility.UrlEncode(search)}.json");
         var query = request.GetQueryParameters();
         return await GetAsync<MapboxGeocodingResponse>(uri.ToString(), query!);
     }
 
-    public async Task<MapboxGeocodingResponse> Reverse(double latitude, double longitude)
+    public async Task<MapboxGeocodingResponse> Reverse(double latitude, double longitude, string[] types)
     {
-        return await Reverse(latitude, longitude, new MapboxGeocodingRequest());
+        return await Reverse(latitude, longitude, new MapboxGeocodingRequest {Types = types});
     }
 
     private async Task<MapboxGeocodingResponse> Reverse(double latitude, double longitude,
         MapboxGeocodingRequest request)
     {
-        var uri = new Uri(baseUri, $"geocoding/v5/mapbox.places/{longitude},{latitude}.json");
+        var uri = new Uri(_baseUri, $"geocoding/v5/mapbox.places/{longitude},{latitude}.json");
         var query = request.GetQueryParameters();
         return await GetAsync<MapboxGeocodingResponse>(uri.ToString(), query!);
     }
@@ -41,7 +42,7 @@ public class MapboxClient
     {
         var requestUri = QueryHelpers.AddQueryString(uri, query);
 
-        var response = await client.GetAsync(QueryHelpers.AddQueryString(requestUri, defaultQueryParams!));
+        var response = await _client.GetAsync(QueryHelpers.AddQueryString(requestUri, _defaultQueryParams!));
         response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadFromJsonAsync<T>() ?? throw new Exception("Failed to parse response");

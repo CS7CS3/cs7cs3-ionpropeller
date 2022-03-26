@@ -1,4 +1,5 @@
 using IonPropeller.RemoteServices.Mapbox.Resources;
+using IonPropeller.Services.Geocoding;
 
 namespace IonPropeller.RemoteServices.Mapbox;
 
@@ -23,6 +24,11 @@ public class MapboxGeocodingService : IGeocodingService
 
     public async Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude)
     {
-        return (await _client.Reverse(latitude, longitude)).Features.Select(f => (GeocodingFeature) f);
+        return await QueryReverse(latitude, longitude, MapboxGeocodingRequest.DefaultRequestTypes);
+    }
+
+    public async Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude, string[] types)
+    {
+        return (await _client.Reverse(latitude, longitude, types)).Features.Select(f => (GeocodingFeature) f);
     }
 }

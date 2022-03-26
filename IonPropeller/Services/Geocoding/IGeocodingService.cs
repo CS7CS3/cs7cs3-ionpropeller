@@ -1,4 +1,4 @@
-namespace IonPropeller.RemoteServices;
+namespace IonPropeller.Services.Geocoding;
 
 public interface IGeocodingService
 {
@@ -10,4 +10,9 @@ public interface IGeocodingService
     /// <param name="latitude">Latitude of position to search nearby (e.g. user or pinned location)</param>
     /// <param name="longitude">Longitude of position to search nearby (e.g. user or pinned location)</param>
     public Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude);
+
+    /// <param name="latitude">Latitude of position to search nearby (e.g. user or pinned location)</param>
+    /// <param name="longitude">Longitude of position to search nearby (e.g. user or pinned location)</param>
+    /// <param name="types">Types of desired places</param>
+    public Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude, string[] types);
 }
