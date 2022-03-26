@@ -17,12 +17,14 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: |
+        dotnet restore
+        dotnet tool restore
     - name: Build
       run: dotnet build --no-restore -c Debug
     - name: Generate Swagger
       run: dotnet swagger tofile --output swagger.json IonPropeller/bin/Debug/net6.0/IonPropeller.dll v1
-    - name: Download Artifact
+    - name: Download artifact
       uses: actions/download-artifact@v3.0.0
       with:
         name: swagger.json
