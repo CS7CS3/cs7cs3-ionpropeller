@@ -1,20 +1,21 @@
 using System.Text.Json.Serialization;
+using IonPropeller.Services.Geocoding;
 
 namespace IonPropeller.RemoteServices.Mapbox.Resources;
 
 public class MapboxGeocodingFeature
 {
-    [JsonPropertyName("id")] public string Id { get; set; }
+    [JsonPropertyName("id")] public string Id { get; set; } = Guid.Empty.ToString();
 
-    [JsonPropertyName("center")] public double[] Center { get; set; }
+    [JsonPropertyName("center")] public double[] Center { get; set; } = {0.0, 0.0};
 
-    [JsonPropertyName("place_name")] public string PlaceName { get; set; }
+    [JsonPropertyName("place_name")] public string PlaceName { get; set; } = string.Empty;
 
-    [JsonPropertyName("relevance")] public double Relevance { get; set; }
+    [JsonPropertyName("relevance")] public double Relevance { get; set; } = 0.0;
 
-    [JsonPropertyName("text")] public string Text { get; set; }
+    [JsonPropertyName("text")] public string Text { get; set; } = string.Empty;
 
-    [JsonPropertyName("type")] public string Type { get; set; }
+    [JsonPropertyName("type")] public string Type { get; set; } = string.Empty;
 
     public static implicit operator GeocodingFeature(MapboxGeocodingFeature feature)
     {

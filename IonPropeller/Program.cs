@@ -1,11 +1,16 @@
-using IonPropeller.RemoteServices;
 using IonPropeller.RemoteServices.Mapbox;
+using IonPropeller.Services.Geocoding;
+using IonPropeller.Services.Journey;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddEnvironmentVariables();
 
-// configure services
+// configure built-in services
+
+builder.Services.AddMemoryCache();
+
+// configure application services
 
 builder.Services.AddSingleton(sp => new MapboxConfiguration
 {
@@ -14,6 +19,8 @@ builder.Services.AddSingleton(sp => new MapboxConfiguration
 
 builder.Services.AddSingleton<MapboxClient>();
 builder.Services.AddSingleton<IGeocodingService, MapboxGeocodingService>();
+
+builder.Services.AddSingleton<IGroupService, FakeGroupService>();
 
 // configure web host
 

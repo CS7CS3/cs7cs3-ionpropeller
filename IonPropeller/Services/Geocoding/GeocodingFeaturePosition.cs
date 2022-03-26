@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace IonPropeller.RemoteServices;
+namespace IonPropeller.Services.Geocoding;
 
 public class GeocodingFeaturePosition
 {
