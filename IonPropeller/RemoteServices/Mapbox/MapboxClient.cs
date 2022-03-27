@@ -14,6 +14,9 @@ public class MapboxClient
 
     public MapboxClient(MapboxConfiguration configuration)
     {
+        if (configuration.AccessToken is not { } accessToken || accessToken.Length == 0)
+            throw new ArgumentNullException(nameof(configuration.AccessToken));
+
         _defaultQueryParams = new Dictionary<string, string> {{"access_token", configuration.AccessToken}};
         _client = new HttpClient();
     }

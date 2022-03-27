@@ -2,5 +2,5 @@ namespace IonPropeller.RemoteServices.Mapbox;
 
 public class MapboxConfiguration
 {
-    public string AccessToken { get; init; } = "";
+    public string? AccessToken { get; set; } = "";
 }
