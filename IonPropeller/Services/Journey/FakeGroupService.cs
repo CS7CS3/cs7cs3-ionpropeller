@@ -26,13 +26,13 @@ public class FakeGroupService : IGroupService
         _groupFaker = new Faker<JourneyGroup>()
             .RuleFor(g => g.Guests, (f, _) => participantFaker.Generate(f.Random.Int(1, 5)))
             .RuleFor(g => g.Host, (_, _) => participantFaker.Generate())
-            .RuleFor(g => g.Id, (f, _) => f.Random.Guid().ToString())
+            .RuleFor(g => g.Id, (f, _) => Guid.NewGuid().ToString())
             .RuleFor(g => g.Type, (f, _) => f.PickRandom(groupType));
     }
 
     public Task<JourneyGroup> GetGroup(Guid id)
     {
-        if (_cache.TryGetValue(id, out JourneyGroup group))
+        if (_cache.TryGetValue($"group:{id}", out JourneyGroup group))
             return Task.FromResult(group);
         throw new KeyNotFoundException($"Group with id {id} not found");
     }
