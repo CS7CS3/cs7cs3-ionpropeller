@@ -25,9 +25,12 @@ public class MapboxClient
         return await GetAsync<MapboxGeocodingResponse>(uri.ToString(), query!);
     }
 
-    public async Task<MapboxGeocodingResponse> Reverse(double latitude, double longitude, string[] types)
+    public async Task<MapboxGeocodingResponse> Reverse(double latitude, double longitude, string[] types, uint limit)
     {
-        return await Reverse(latitude, longitude, new MapboxGeocodingRequest {Types = types});
+        if (types.Length > 1 && limit > 1)
+            throw new ArgumentException("Cannot specify multiple types and limit more than 1");
+
+        return await Reverse(latitude, longitude, new MapboxGeocodingRequest {Limit = limit, Types = types});
     }
 
     private async Task<MapboxGeocodingResponse> Reverse(double latitude, double longitude,

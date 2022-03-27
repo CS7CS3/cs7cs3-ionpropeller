@@ -24,11 +24,12 @@ public class MapboxGeocodingService : IGeocodingService
 
     public async Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude)
     {
-        return await QueryReverse(latitude, longitude, MapboxGeocodingRequest.DefaultRequestTypes);
+        return await QueryReverse(latitude, longitude, MapboxGeocodingRequest.DefaultRequestTypes, 1);
     }
 
-    public async Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude, string[] types)
+    public async Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude, string[] types,
+        uint limit)
     {
-        return (await _client.Reverse(latitude, longitude, types)).Features.Select(f => (GeocodingFeature) f);
+        return (await _client.Reverse(latitude, longitude, types, limit)).Features.Select(f => (GeocodingFeature) f);
     }
 }

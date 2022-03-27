@@ -46,9 +46,9 @@ public class FakeGroupService : IGroupService
         if (_cache.TryGetValue(cacheKey, out JourneyGroup[] cachedResult)) return cachedResult;
 
         var destinations = await _geocodingService.QueryReverse(destinationPosition.Latitude,
-            destinationPosition.Longitude, new[] {"poi"});
+            destinationPosition.Longitude, new[] {"poi"}, 10);
         var origins =
-            await _geocodingService.QueryReverse(originPosition.Latitude, originPosition.Longitude, new[] {"poi"});
+            await _geocodingService.QueryReverse(originPosition.Latitude, originPosition.Longitude, new[] {"poi"}, 10);
 
         var result = destinations.Zip(origins, (destination, origin) =>
         {
