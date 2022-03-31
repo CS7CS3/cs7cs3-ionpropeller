@@ -37,8 +37,8 @@ public class FakeGroupService : IGroupService
         throw new KeyNotFoundException($"Group with id {id} not found");
     }
 
-    public async Task<IEnumerable<JourneyGroup>> GetNearbyGroups(GeocodingFeaturePosition destinationPosition,
-        GeocodingFeaturePosition originPosition)
+    public async Task<IEnumerable<JourneyGroup>> GetNearbyGroups(LatitudeLongitudeLike destinationPosition,
+        LatitudeLongitudeLike originPosition)
     {
         var cacheKey =
             $"group@{originPosition.Latitude},{originPosition.Longitude}>{destinationPosition.Latitude},{destinationPosition.Longitude}";

@@ -23,7 +23,7 @@ public class MapboxGeocodingFeature
         {
             Address = feature.PlaceName,
             DisplayName = feature.Text,
-            Position = new GeocodingFeaturePosition {Latitude = feature.Center[1], Longitude = feature.Center[0]},
+            Position = new LatitudeLongitudeLike {Latitude = feature.Center[1], Longitude = feature.Center[0]},
             Relevance = feature.Relevance,
             Type = feature.Type
         };

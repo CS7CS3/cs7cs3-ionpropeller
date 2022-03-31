@@ -6,6 +6,6 @@ public interface IGroupService
 {
     public Task<JourneyGroup> GetGroup(Guid id);
 
-    public Task<IEnumerable<JourneyGroup>> GetNearbyGroups(GeocodingFeaturePosition destinationPosition,
-        GeocodingFeaturePosition originPosition);
+    public Task<IEnumerable<JourneyGroup>> GetNearbyGroups(LatitudeLongitudeLike destinationPosition,
+        LatitudeLongitudeLike originPosition);
 }

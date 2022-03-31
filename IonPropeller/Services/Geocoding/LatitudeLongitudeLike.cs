@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace IonPropeller.Services.Geocoding;
 
-public class GeocodingFeaturePosition
+public class LatitudeLongitudeLike
 {
     [JsonPropertyName("lat")] public double Latitude { get; set; }
 

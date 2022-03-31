@@ -17,9 +17,9 @@ public class MapboxGeocodingService : IGeocodingService
         var request = new MapboxGeocodingRequest
         {
             Limit = 5,
-            Position = new GeocodingFeaturePosition {Latitude = latitude, Longitude = longitude}
+            Position = new LatitudeLongitudeLike {Latitude = latitude, Longitude = longitude}
         };
-        return (await _client.Forward(address, request)).Features.Select(f => (GeocodingFeature) f);
+        return (await _client.GetGeocodingForward(address, request)).Features.Select(f => (GeocodingFeature) f);
     }
 
     public async Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude)
@@ -30,6 +30,7 @@ public class MapboxGeocodingService : IGeocodingService
     public async Task<IEnumerable<GeocodingFeature>> QueryReverse(double latitude, double longitude, string[] types,
         uint limit)
     {
-        return (await _client.Reverse(latitude, longitude, types, limit)).Features.Select(f => (GeocodingFeature) f);
+        return (await _client.GetGeocodingReverse(latitude, longitude, types, limit)).Features.Select(f =>
+            (GeocodingFeature) f);
     }
 }

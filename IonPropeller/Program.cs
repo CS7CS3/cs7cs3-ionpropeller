@@ -1,4 +1,5 @@
 using IonPropeller.RemoteServices.Mapbox;
+using IonPropeller.Services.Directions;
 using IonPropeller.Services.Geocoding;
 using IonPropeller.Services.Journey;
 
@@ -21,6 +22,8 @@ builder.Services.AddSingleton<MapboxClient>();
 builder.Services.AddSingleton<IGeocodingService, MapboxGeocodingService>();
 
 builder.Services.AddSingleton<IGroupService, FakeGroupService>();
+
+builder.Services.AddSingleton<IDirectionService, MapboxDirectionService>();
 
 // configure web host
 

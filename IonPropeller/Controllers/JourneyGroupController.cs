@@ -45,12 +45,12 @@ public class JourneyGroupController : Controller
         if (!ModelState.IsValid) return BadRequest();
 
         return Ok(await _groupService.GetNearbyGroups(
-            new GeocodingFeaturePosition
+            new LatitudeLongitudeLike
             {
                 Latitude = destinationLatitude,
                 Longitude = destinationLongitude
             },
-            new GeocodingFeaturePosition
+            new LatitudeLongitudeLike
             {
                 Latitude = originLatitude,
                 Longitude = originLongitude

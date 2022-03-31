@@ -9,7 +9,7 @@ public class GeocodingFeature
     [JsonPropertyName("displayName")] public string DisplayName { get; init; } = string.Empty;
 
     [JsonPropertyName("position")]
-    public GeocodingFeaturePosition Position { get; init; } = new() {Latitude = 0.0, Longitude = 0.0};
+    public LatitudeLongitudeLike Position { get; init; } = new() {Latitude = 0.0, Longitude = 0.0};
 
     [JsonPropertyName("relevance")] public double Relevance { get; set; }
 

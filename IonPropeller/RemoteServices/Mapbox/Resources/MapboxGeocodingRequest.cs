@@ -12,7 +12,7 @@ public class MapboxGeocodingRequest
 
     public uint? Limit { get; set; } = 10;
 
-    public GeocodingFeaturePosition? Position { get; set; }
+    public LatitudeLongitudeLike? Position { get; set; }
 
     public string[] Types { get; set; } = DefaultRequestTypes;
 
